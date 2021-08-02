@@ -207,7 +207,7 @@ class _GravadorState extends State<Gravador> {
   ouvirAudio() async {
     audioPlayer.play(current!.path!, isLocal: true);
     io.sleep(Duration(seconds: current!.duration!.inSeconds));
-    //showAlertDialog(context);
+    showAlertDialog(context);
     developer.log(current!.path!);
     setState(() {
       isPlaying = true;
@@ -219,5 +219,51 @@ class _GravadorState extends State<Gravador> {
     var caminho = current!.path!;
     var file = io.File(caminho);
     file.delete();
+  }
+
+  showAlertDialog(BuildContext context) {
+    Widget apagarButton = TextButton(
+        onPressed: () {
+          apagarArquivo();
+          audioPlayer.stop();
+
+          setState(() {
+            isPlaying = false;
+            status = "";
+          });
+
+          Navigator.of(context).pop();
+        },
+        child: const Text("Não"));
+
+    Widget salvarButton = TextButton(
+        onPressed: () {
+          setState(() {
+            isPlaying = false;
+            status = "";
+          });
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text(
+            "Gravação salva!",
+            textAlign: TextAlign.center,
+          )));
+        },
+        child: Text("Sim"));
+
+    AlertDialog alert = AlertDialog(
+        title: const Text("Gravação"),
+        content: const Text("Gostou da gravação?"),
+        elevation: 5.0,
+        actions: [
+          apagarButton,
+          salvarButton,
+        ]);
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) {
+          return alert;
+        });
   }
 }
