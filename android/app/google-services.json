@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "170603450609",
+    "project_id": "gravador-de-audio",
+    "storage_bucket": "gravador-de-audio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170603450609:android:0859cd9f0b18ac92445950",
+        "android_client_info": {
+          "package_name": "com.example.new_recorder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "170603450609-tq0me51vu1emi73tguegrq6due97lb9o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.new_recorder",
+            "certificate_hash": "3529f29261498667860a23308239aee488e84e82"
+          }
+        },
+        {
+          "client_id": "170603450609-ol6dfn8kbtg8phr8fsenu43spslm0scv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEpS0JofvaHlhdDNlJiXC--NWkfb9mv5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "170603450609-ol6dfn8kbtg8phr8fsenu43spslm0scv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

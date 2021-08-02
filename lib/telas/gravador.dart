@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io' as io;
 import 'dart:developer' as developer;
 import 'package:audioplayers/audioplayers.dart';
+import '../models/google_upload.dart';
 
 class Gravador extends StatefulWidget {
   final LocalFileSystem localFileSystem;
@@ -157,6 +158,7 @@ class _GravadorState extends State<Gravador> {
   }
 
   init() async {
+    await logarDrive();
     bool temPermissao = await FlutterAudioRecorder2.hasPermissions ?? false;
 
     try {
@@ -249,7 +251,7 @@ class _GravadorState extends State<Gravador> {
             textAlign: TextAlign.center,
           )));
         },
-        child: Text("Sim"));
+        child: const Text("Sim"));
 
     AlertDialog alert = AlertDialog(
         title: const Text("Gravação"),
