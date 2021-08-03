@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'dart:math';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_recorder2/flutter_audio_recorder2.dart';
 import 'package:file/local.dart';
@@ -37,7 +39,7 @@ class _GravadorState extends State<Gravador> {
 
   Widget _construirImagem() {
     return SizedBox(
-      width: 300,
+      width: 400,
       child: Image.asset(
         "assets/images/img.png",
         fit: BoxFit.contain,
@@ -66,7 +68,7 @@ class _GravadorState extends State<Gravador> {
 
   Widget _construirBordasArrendondas(Widget filho, double altura) {
     return Container(
-      width: 400,
+      width: 300,
       height: altura,
       padding: const EdgeInsets.all(8.0),
       decoration: const BoxDecoration(
@@ -111,7 +113,7 @@ class _GravadorState extends State<Gravador> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _construirImagem(),
-            _construirBordasArrendondas(_construirTexto(status), 50),
+            _construirBordasArrendondas(_construirTexto(status), 35),
             _construirBordasArrendondas(
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -120,7 +122,7 @@ class _GravadorState extends State<Gravador> {
                   _construirBotaoAudio(),
                 ],
               ),
-              200,
+              150,
             ),
           ],
         ),
@@ -158,7 +160,6 @@ class _GravadorState extends State<Gravador> {
   }
 
   init() async {
-    await logarDrive();
     bool temPermissao = await FlutterAudioRecorder2.hasPermissions ?? false;
 
     try {
@@ -223,6 +224,15 @@ class _GravadorState extends State<Gravador> {
     file.delete();
   }
 
+  notificar(mensagem) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        elevation: 5,
+        content: Text(
+          mensagem,
+          textAlign: TextAlign.center,
+        )));
+  }
+
   showAlertDialog(BuildContext context) {
     Widget apagarButton = TextButton(
         onPressed: () {
@@ -233,29 +243,28 @@ class _GravadorState extends State<Gravador> {
             isPlaying = false;
             status = "";
           });
-
+          notificar('Áudio descartado');
           Navigator.of(context).pop();
         },
         child: const Text("Não"));
 
     Widget salvarButton = TextButton(
-        onPressed: () {
+        onPressed: () async {
+          //correio.enviarArquivos();
+          UploadFileDrive correio = UploadFileDrive(current!.path!);
+          correio.enviarArquivos();
           setState(() {
             isPlaying = false;
             status = "";
           });
+          notificar('Áudio salvo no Google Drive');
           Navigator.of(context).pop();
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text(
-            "Gravação salva!",
-            textAlign: TextAlign.center,
-          )));
         },
         child: const Text("Sim"));
 
     AlertDialog alert = AlertDialog(
         title: const Text("Gravação"),
-        content: const Text("Gostou da gravação?"),
+        content: const Text("A qualidade do áudio estava boa?"),
         elevation: 5.0,
         actions: [
           apagarButton,
