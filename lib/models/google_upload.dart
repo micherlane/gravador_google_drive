@@ -1,8 +1,9 @@
 import 'dart:io';
-
+import 'dart:developer' as d;
 import 'package:google_sign_in/google_sign_in.dart' as login;
 import 'package:googleapis/drive/v3.dart' as drive;
 import 'google_auth_cliente.dart';
+import 'package:intl/intl.dart';
 
 class UploadFileDrive {
   final String nomeArquivo;
@@ -17,7 +18,7 @@ class UploadFileDrive {
     return account;
   }
 
-  Future enviarArquivos() async {
+  Future<String> enviarArquivos() async {
     login.GoogleSignInAccount account = await logarDrive();
     final authHeaders = await account.authHeaders;
     final authenticateClient = GoogleAuthCliente(authHeaders);
@@ -25,10 +26,20 @@ class UploadFileDrive {
 
     File file = File(nomeArquivo);
 
+    var f = await driveApi.files
+        .list(q: "mimeType = 'application/vnd.google-apps.folder'");
+    String folderId = f.toJson()['files'][0]['id'];
+    d.log(folderId);
+
     var driveFile = drive.File();
-    driveFile.name = "audio";
+    driveFile.parents = [folderId];
+    driveFile.name =
+        "wav - " + DateFormat('d of MMM of y HH:MM:SS').format(DateTime.now());
+
     final result = await driveApi.files.create(driveFile,
         uploadMedia: drive.Media(file.openRead(), file.lengthSync()));
-    print("Upload result: $result");
+
+    d.log(result.toString());
+    return "Áudio enviado para o Google Drive";
   }
 }

@@ -1,7 +1,5 @@
-import 'dart:io';
 import 'dart:math';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_recorder2/flutter_audio_recorder2.dart';
 import 'package:file/local.dart';
@@ -68,12 +66,12 @@ class _GravadorState extends State<Gravador> {
 
   Widget _construirBordasArrendondas(Widget filho, double altura) {
     return Container(
-      width: 300,
+      width: 400,
       height: altura,
       padding: const EdgeInsets.all(8.0),
       decoration: const BoxDecoration(
         color: Colors.white60,
-        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        borderRadius: BorderRadius.all(Radius.circular(20.0)),
       ),
       child: filho,
     );
@@ -82,7 +80,7 @@ class _GravadorState extends State<Gravador> {
   Widget _construirTexto(texto) {
     return Text(texto.toString().toUpperCase(),
         textAlign: TextAlign.center,
-        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25));
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20));
   }
 
   Widget _construirBotaoAudio() {
@@ -252,12 +250,15 @@ class _GravadorState extends State<Gravador> {
         onPressed: () async {
           //correio.enviarArquivos();
           UploadFileDrive correio = UploadFileDrive(current!.path!);
-          correio.enviarArquivos();
+          Future<String> mensagem = correio.enviarArquivos();
+          mensagem.then((msg) {
+            notificar(msg);
+          });
+
           setState(() {
             isPlaying = false;
             status = "";
           });
-          notificar('Áudio salvo no Google Drive');
           Navigator.of(context).pop();
         },
         child: const Text("Sim"));
