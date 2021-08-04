@@ -66,6 +66,7 @@ class _GravadorState extends State<Gravador> {
 
   Widget _construirBordasArrendondas(Widget filho, double altura) {
     return Container(
+      margin: const EdgeInsets.all(10),
       width: 400,
       height: altura,
       padding: const EdgeInsets.all(8.0),
@@ -104,25 +105,27 @@ class _GravadorState extends State<Gravador> {
       appBar: AppBar(
         title: const Text('RECORDER'),
       ),
-      body: Container(
-        margin: const EdgeInsets.all(10.0),
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _construirImagem(),
-            _construirBordasArrendondas(_construirTexto(status), 35),
-            _construirBordasArrendondas(
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _construirBotaoGravacao(),
-                  _construirBotaoAudio(),
-                ],
+      body: SingleChildScrollView(
+        child: Container(
+          margin: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _construirImagem(),
+              _construirBordasArrendondas(_construirTexto(status), 35),
+              _construirBordasArrendondas(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _construirBotaoGravacao(),
+                    _construirBotaoAudio(),
+                  ],
+                ),
+                131,
               ),
-              150,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

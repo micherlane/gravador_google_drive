@@ -35,7 +35,7 @@ class UploadFileDrive {
     var driveFile = drive.File();
     driveFile.parents = [folderId];
     driveFile.name =
-        "wav - " + DateFormat('d of MMM of y HH:MM').format(DateTime.now());
+        "wav - " + DateFormat('d of MMM of y').format(DateTime.now());
 
     final result = await driveApi.files.create(driveFile,
         uploadMedia: drive.Media(file.openRead(), file.lengthSync()));
