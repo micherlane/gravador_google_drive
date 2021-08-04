@@ -1,16 +1,8 @@
-# new_recorder
+# Gravador de wave
 
-A new Flutter project.
+O app permite gravar e ouvir um arquivo de áudio wave.
+Os áudio são gravados no Google Drive.
 
-## Getting Started
+https://drive.google.com/drive/folders/1Obc0jWXD9Qfg2m77gE3Jhpc-paXM0sLD?usp=sharing
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Alt text](https://drive.google.com/file/d/1sKWbi9jTG2rIIaGddmOwflRs2maob_na/view?usp=sharing "Google Auth Cliente")
