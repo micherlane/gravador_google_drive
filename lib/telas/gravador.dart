@@ -253,6 +253,7 @@ class _GravadorState extends State<Gravador> {
           Future<String> mensagem = correio.enviarArquivos();
           mensagem.then((msg) {
             notificar(msg);
+            apagarArquivo();
           });
 
           setState(() {
