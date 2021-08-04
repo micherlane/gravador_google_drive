@@ -30,6 +30,7 @@ class UploadFileDrive {
         .list(q: "mimeType = 'application/vnd.google-apps.folder'");
     String folderId = f.toJson()['files'][0]['id'];
     d.log(folderId);
+    d.log(f.toJson().toString());
 
     var driveFile = drive.File();
     driveFile.parents = [folderId];
